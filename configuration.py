@@ -1,12 +1,11 @@
+from src.generators_user.generate_user import User
+
 
 SERVICE_URL = 'https://parabank.parasoft.com/parabank/services/bank'
 URL_MAIN = f'https://parabank.parasoft.com/parabank/index.htm'
 
-log = 'lllldsadasdall'
-users = [
-    ('First_name', 'Last_name', 'Address', 'City', 'State', 'Zip code', 'Phone', 'SNN', f'{log}', f'{log}', f'{log}')
-]
 
+log = 'asda'
 account_id = 13677
 customers_id = 12545
 transactionsID = 14476

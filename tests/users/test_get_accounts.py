@@ -2,8 +2,9 @@ import pytest
 
 
 from src.baseclasses.response import Response, Response_json
-from src.pydantic_schemas.get_accounts import CustomerID_positions, AccountID_transactions_fromdate_todate, AccountID_transactions_ondate, AccountID_transactions_month_type, Accounts_accountsID_transactions, Customers_customerID_accounts, Accounts_accountsID, Accounts_accountsID_transactions_amount
+from src.pydantic_schemas.get_accounts import *
 from src.pydantic_schemas.get_customers import Post_custoner_info
+
 
 
 def test_create_account(create_account):

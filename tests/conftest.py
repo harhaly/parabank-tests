@@ -1,7 +1,7 @@
 import pytest
 import requests
+from configuration import *
 
-from configuration import SERVICE_URL, SERVICE_URL_GET_CUSTOMER_CUSTOMERID, SERVICE_URL_GET_CUSTOMER_CUSTOMERID_ACCOUNTS, SERVICE_URL_GET_CUSTOMER_CUSTOMERID_POSITIONS
 
 
 @pytest.fixture

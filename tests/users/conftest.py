@@ -2,9 +2,11 @@ import pytest
 import requests
 import time
 
+from configuration import *
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from configuration import users, URL_MAIN, SERVICE_URL_GET_ACCOUNTID_TRANSACTIONS_FROMDATE_TODATE, SERVICE_URL_GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_ONDATE, SERVICE_URL_GET_ACCOUNTID_TRANSACTIONS_MONTH_TYPE, SERVICE_URL_GET_ACCOUNTID_TRANSACTIONS_AMOUNT, SERVICE_URL_GET_TRANSACTIONS_TRANSACTIONSID, SERVICE_URL_GET_ACCOUNTID_TRANSACTIONS, SERVICE_URL_GET_CUSTOMER_CUSTOMERID_POSITIONS, SERVICE_URL_GET_MISC,SERVICE_URL_GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS, SERVICE_URL_GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_FROMDATE_TODATE, SERVICE_URL_GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_ONDATE, SERVICE_URL_GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_MONTH_TYPE ,SERVICE_URL_GET_CUSTOMERS_CUSTOMERID_ACCOUNTS ,SERVICE_URL_GET_ACCOUNTS_ACCOUNTID, SERVICE_URL_GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_AMOUNT
+
+from src.generators_user.generate_user import User
 
 
 @pytest.fixture
@@ -12,19 +14,22 @@ def create_account():
     browser = webdriver.Chrome()
     browser.get(URL_MAIN)
 
+    # create field registration
+    user = User().build()
+
     #registration
     browser.find_element(By.LINK_TEXT, 'Register').click()
-    browser.find_element(By.ID, 'customer.firstName').send_keys(users[0][0])
-    browser.find_element(By.ID, 'customer.lastName').send_keys(users[0][1])
-    browser.find_element(By.ID, 'customer.address.street').send_keys(users[0][2])
-    browser.find_element(By.ID, 'customer.address.city').send_keys(users[0][3])
-    browser.find_element(By.ID, 'customer.address.state').send_keys(users[0][4])
-    browser.find_element(By.ID, 'customer.address.zipCode').send_keys(users[0][5])
-    browser.find_element(By.ID, 'customer.phoneNumber').send_keys(users[0][6])
-    browser.find_element(By.ID, 'customer.ssn').send_keys(users[0][7])
-    browser.find_element(By.ID, 'customer.username').send_keys(users[0][8])
-    browser.find_element(By.ID, 'customer.password').send_keys(users[0][9])
-    browser.find_element(By.ID, 'repeatedPassword').send_keys(users[0][10])
+    browser.find_element(By.ID, 'customer.firstName').send_keys(user['First_name'])
+    browser.find_element(By.ID, 'customer.lastName').send_keys(user['Last_name'])
+    browser.find_element(By.ID, 'customer.address.street').send_keys(user['Address'])
+    browser.find_element(By.ID, 'customer.address.city').send_keys(user['City'])
+    browser.find_element(By.ID, 'customer.address.state').send_keys(user['State'])
+    browser.find_element(By.ID, 'customer.address.zipCode').send_keys(user['Zip code'])
+    browser.find_element(By.ID, 'customer.phoneNumber').send_keys(user['Phone'])
+    browser.find_element(By.ID, 'customer.ssn').send_keys(user['SSN'])
+    browser.find_element(By.ID, 'customer.username').send_keys(user['Username'])
+    browser.find_element(By.ID, 'customer.password').send_keys(user['Password'])
+    browser.find_element(By.ID, 'repeatedPassword').send_keys(user['Confirm'])
     browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[2]/form/table/tbody/tr[13]/td[2]/input').click()
     time.sleep(1)
 
