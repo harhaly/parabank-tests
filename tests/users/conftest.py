@@ -11,10 +11,16 @@ from src.generators_user.generate_user import User
 
 @pytest.fixture
 def create_account():
+
+    global account_id
+    if account_id != 0:
+        return account_id
+
     browser = webdriver.Chrome()
     browser.get(URL_MAIN)
 
     # create field registration
+    #user = User().get_Password_Confirm('ss').get_Username('ss').build()
     user = User().build()
 
     #registration
@@ -42,14 +48,14 @@ def create_account():
 
 
 @pytest.fixture
-def get_accounts_accountID_transactions():
-    response = requests.get(url=SERVICE_URL_GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS, headers={'Accept': 'application/json'})
+def get_accounts_accountID_transactions(create_account):
+    response = requests.get(url=SERVICE_URL_GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS.format(create_account), headers={'Accept': 'application/json'})
     return response
 
 
 @pytest.fixture
-def get_accounts_accountID():
-    response = requests.get(url=SERVICE_URL_GET_ACCOUNTS_ACCOUNTID, headers={'Accept': 'application/json'})
+def get_accounts_accountID(create_account):
+    response = requests.get(url=SERVICE_URL_GET_ACCOUNTS_ACCOUNTID.format(create_account), headers={'Accept': 'application/json'})
     return response
 
 
@@ -122,4 +128,35 @@ def get_accountID_transactions_fromdate_todae():
 @pytest.fixture()
 def get_accountID_transactions_ondate():
     response = requests.get(url=SERVICE_URL_GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_ONDATE, headers={'Accept': 'application/json'})
+    return response
+
+
+#test_POST
+@pytest.fixture()
+def post_createAccount():
+    response = requests.post(url=POST_CREATE_ACCOUNT, headers={'Accept': 'application/json'})
+    return response
+
+
+@pytest.fixture()
+def post_deposit():
+    response = requests.post(url=POST_DEPOSIT, headers={'Accept': 'application/json'})
+    return response
+
+
+@pytest.fixture()
+def post_withdraw():
+    response = requests.post(url=POST_WITHDRAW, headers={'Accept': 'application/json'})
+    return response
+
+
+@pytest.fixture()
+def post_transfer():
+    response = requests.post(url=POST_TRANSFER, headers={'Accept': 'application/json'})
+    return response
+
+
+@pytest.fixture()
+def post_update_info():
+    response = requests.post(url=POST_UPDATE, headers={'Accept': 'application/json'})
     return response

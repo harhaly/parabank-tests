@@ -3,6 +3,7 @@ class Response:
     def __init__(self, response):
         self.response = response
         self.response_status = response.status_code
+        self.response_text = response.text
 
     def assert_status_code(self, status_code):
         if isinstance(status_code, list):
@@ -12,12 +13,18 @@ class Response:
         return self
 
 
+    def validate_str(self):
+        assert type(self.response_text) == str, self
+        return self
+
+
 class Response_json:
     'response with json'
     def __init__(self, response):
         self.response = response
         self.response_json = response.json()
         self.response_status = response.status_code
+
 
     def validate(self, schema):
         if isinstance(self.response_json, list):
@@ -32,6 +39,7 @@ class Response_json:
         else:
             assert self.response_status == status_code, self
         return self
+
 
     def resp_json(self):
         return self.response_json
