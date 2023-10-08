@@ -95,18 +95,11 @@ def get_accountID_transactions_fromdate_todate(create_account):
     response = requests.get(url=GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_FROMDATE_TODATE.format(create_account, from_date, to_date), headers={'Accept': 'application/json'})
     return response
 
-
-
-
-
-@pytest.fixture
-def get_login_username_password(create_account):
-    response = requests.get(url=GET_MISC, headers={'Accept': 'application/json'})
-    return response
-
-
-
-
+#
+# @pytest.fixture
+# def get_login_username_password(create_account):
+#     response = requests.get(url=GET_MISC, headers={'Accept': 'application/json'})
+#     return response
 
 
 # need customerId
@@ -125,12 +118,6 @@ def get_customers_customerID_positions(get_accounts_accountID):
 # @pytest.fixture()
 # def get_accountID_transactions_amount():
 #     response = requests.get(url=GET_ACCOUNTID_TRANSACTIONS_AMOUNT, headers={'Accept': 'application/json'})
-#     return response
-#
-#
-# @pytest.fixture()
-# def get_accountID_transactions_fromdate_todae():
-#     response = requests.get(url=GET_ACCOUNTID_TRANSACTIONS_FROMDATE_TODATE, headers={'Accept': 'application/json'})
 #     return response
 
 

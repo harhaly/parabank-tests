@@ -43,7 +43,7 @@ GET_MISC = f'{SERVICE_URL}/login/' + '{}/{}'
 
 GET_TRANSACTIONS_TRANSACTIONSID = f'{SERVICE_URL}/transactions/{transactionsID}'
 GET_ACCOUNTID_TRANSACTIONS_AMOUNT = f'{SERVICE_URL}/accounts/{account_id}/transactions/amount/{amount}'
-GET_ACCOUNTID_TRANSACTIONS_FROMDATE_TODATE = f'{SERVICE_URL}/accounts/{account_id}/transactions/fromDate/{from_date}/todate/{to_date}'
+
 
 POST_CREATE_ACCOUNT = f'{SERVICE_URL}/createAccount?customerId={customers_id}&newAccountType={newAccountType}&fromAccountId={account_id}'
 POST_DEPOSIT = f'{SERVICE_URL}/deposit?accountId={account_id}&amount={amount}'
@@ -51,4 +51,4 @@ POST_WITHDRAW = f'{SERVICE_URL}/withdraw?accountId={account_id}&amount={amount}'
 POST_TRANSFER = f'{SERVICE_URL}/transfer?fromAccountId={fromAccount}&toAccountId={account_id}&amount={amount}'
 #POST_BILLPAY = f'{SERVICE_URL}'
 POST_UPDATE = f'{SERVICE_URL}/customers/update/{customers_id}?firstName={a}&lastName={a}&street={a}&city={a}&state={a}&zipCode={a}&phoneNumber={a}&ssn={a}&username={a}&password={a}'
-POST_REQUESTLOAN = f''
+#POST_REQUESTLOAN = f''
