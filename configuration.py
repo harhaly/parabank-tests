@@ -4,45 +4,46 @@ URL_MAIN = f'https://parabank.parasoft.com/parabank/index.htm'
 
 global account_id
 account_id = 0
+from_date = '01-01-1990'
+to_date = '01-01-2040'
+on_date = '10-08-2023'
 
-customers_id = 15209
 transactionsID = 14476
-amount = 11
+amount = 111
 fromAccount = 20337
 toAccount = 20448
 transaction_type = "CREDIT" # хз что тут
 month = "10" # хз что тут
-from_date = '01-01-1990'
-to_date = '01-01-2040'
-on_date = '10-05-2023'
+
+
 newAccountType = 0
 log = 'asda'
 user_name = log
 password = log
 a = 'a'
 
+customers_id = 15209
 
-SERVICE_URL_GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS = f'{SERVICE_URL}/accounts/' + '{}/transactions'
-SERVICE_URL_GET_CUSTOMERS_CUSTOMERID_ACCOUNTS = f'{SERVICE_URL}/customers/{customers_id}/accounts'
-SERVICE_URL_GET_ACCOUNTS_ACCOUNTID = f'{SERVICE_URL}'+'/accounts/{}'
-SERVICE_URL_GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_AMOUNT = f'{SERVICE_URL}/accounts/{account_id}/transactions/amount/{amount}'
-SERVICE_URL_GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_MONTH_TYPE = f'{SERVICE_URL}/accounts/{account_id}/transactions/month/{month}/type/{transaction_type}'
-SERVICE_URL_GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_FROMDATE_TODATE = f'{SERVICE_URL}/accounts/{account_id}/transactions/fromDate/{from_date}/toDate/{to_date}'
-SERVICE_URL_GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_ONDATE = f'{SERVICE_URL}/accounts/{account_id}/transactions/onDate/{on_date}'
+GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS = f'{SERVICE_URL}/accounts/' + '{}/transactions'
+GET_CUSTOMERS_CUSTOMERID_ACCOUNTS = f'{SERVICE_URL}/customers/' + '{}/accounts'
+GET_ACCOUNTS_ACCOUNTID = f'{SERVICE_URL}' + '/accounts/{}'
 
-SERVICE_URL_GET_CUSTOMER_CUSTOMERID = f'{SERVICE_URL}/customers/{customers_id}'
-SERVICE_URL_GET_CUSTOMER_CUSTOMERID_POSITIONS = f'{SERVICE_URL}/customers/{customers_id}/positions'
-SERVICE_URL_GET_CUSTOMER_CUSTOMERID_ACCOUNTS = f'{SERVICE_URL}/customers/{customers_id}/accounts'
+GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_AMOUNT = f'{SERVICE_URL}/accounts/' + '{}/transactions/amount/{}'
+#GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_MONTH_TYPE = f'{SERVICE_URL}/accounts/{account_id}/transactions/month/{month}/type/{transaction_type}'
+GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_FROMDATE_TODATE = f'{SERVICE_URL}/accounts/' + '{}/transactions/fromDate/{}/toDate/{}'
+GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_ONDATE = f'{SERVICE_URL}/accounts/' + '{}/transactions/onDate/{}'
 
-SERVICE_URL_GET_POSITINS_CUSTOMERID = f'{SERVICE_URL}/customers/{customers_id}/positions'
+GET_CUSTOMER_CUSTOMERID = f'{SERVICE_URL}/customers/{customers_id}'
+GET_CUSTOMER_CUSTOMERID_POSITIONS = f'{SERVICE_URL}/customers/' + '{}/positions'
+GET_CUSTOMER_CUSTOMERID_ACCOUNTS = f'{SERVICE_URL}/customers/{customers_id}/accounts'
 
-SERVICE_URL_GET_MISC = f'{SERVICE_URL}/login/{user_name}/{password}'
+#GET_POSITINS_CUSTOMERID = f'{SERVICE_URL}/customers/{customers_id}/positions'
 
-SERVICE_URL_GET_TRANSACTIONS_TRANSACTIONSID = f'{SERVICE_URL}/transactions/{transactionsID}'
-SERVICE_URL_GET_ACCOUNTID_TRANSACTIONS = f'{SERVICE_URL}/accounts/{account_id}/transactions'
-SERVICE_URL_GET_ACCOUNTID_TRANSACTIONS_AMOUNT = f'{SERVICE_URL}/accounts/{account_id}/transactions/amount/{amount}'
-SERVICE_URL_GET_ACCOUNTID_TRANSACTIONS_MONTH_TYPE = f'{SERVICE_URL}/accounts/{account_id}/transactions/month/{month}/type/{transaction_type}'
-SERVICE_URL_GET_ACCOUNTID_TRANSACTIONS_FROMDATE_TODATE = f'{SERVICE_URL}/accounts/{account_id}/transactions/fromDate/{from_date}/todate/{to_date}'
+GET_MISC = f'{SERVICE_URL}/login/' + '{}/{}'
+
+GET_TRANSACTIONS_TRANSACTIONSID = f'{SERVICE_URL}/transactions/{transactionsID}'
+GET_ACCOUNTID_TRANSACTIONS_AMOUNT = f'{SERVICE_URL}/accounts/{account_id}/transactions/amount/{amount}'
+GET_ACCOUNTID_TRANSACTIONS_FROMDATE_TODATE = f'{SERVICE_URL}/accounts/{account_id}/transactions/fromDate/{from_date}/todate/{to_date}'
 
 POST_CREATE_ACCOUNT = f'{SERVICE_URL}/createAccount?customerId={customers_id}&newAccountType={newAccountType}&fromAccountId={account_id}'
 POST_DEPOSIT = f'{SERVICE_URL}/deposit?accountId={account_id}&amount={amount}'
