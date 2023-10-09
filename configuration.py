@@ -4,6 +4,9 @@ URL_MAIN = f'https://parabank.parasoft.com/parabank/index.htm'
 
 global account_id
 account_id = 0
+global data
+data = (0, 0, 0)
+
 from_date = '01-01-1990'
 to_date = '01-01-2040'
 on_date = '10-08-2023'

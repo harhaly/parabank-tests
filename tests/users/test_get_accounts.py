@@ -74,16 +74,16 @@ def test_validate_accountsID_transactions_ondate(get_accountID_transactions_onda
     test_object.assert_status_code(200).validate(AccountID_transactions_ondate)
 
 
-# def test_validate_misc_login(get_login_username_password):
-#     """
-#     Тест валидация /login/{username}/{password}
-#     :param get_login_username_password:
-#     :return:
-#     """
-#     test_object = Response_json(get_login_username_password)
-#     test_object.assert_status_code(200).validate(Post_custoner_info)
-#
-#
+def test_validate_misc_login(get_login_username_password):
+    """
+    Тест валидация /login/{username}/{password}
+    :param get_login_username_password:
+    :return:
+    """
+    print(get_login_username_password.text)
+    test_object = Response_json(get_login_username_password)
+    test_object.assert_status_code(200).validate(Post_custoner_info)
+
 
 def test_validate_customersID_positions(get_customers_customerID_positions):
     """

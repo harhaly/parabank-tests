@@ -9,19 +9,22 @@ from selenium.webdriver.common.by import By
 from src.generators_user.generate_user import User
 from src.baseclasses.response import Response, Response_json
 
+
 @pytest.fixture
 def create_account():
 
-    global account_id
-    if account_id != 0:
-        return account_id
+    #global account_id
+    global data
+    if data [0] != 0:
+        return data
 
     browser = webdriver.Chrome()
     browser.get(URL_MAIN)
+    browser.implicitly_wait(5)
 
     # create field registration
-    user = User().get_Password_Confirm('ss').get_Username('ss').build()
-    #user = User().build()
+    #user = User().get_Username('z').get_Password_Confirm('z').build()
+    user = User().build()
 
     #registration
     browser.find_element(By.LINK_TEXT, 'Register').click()
@@ -37,7 +40,6 @@ def create_account():
     browser.find_element(By.ID, 'customer.password').send_keys(user['Password'])
     browser.find_element(By.ID, 'repeatedPassword').send_keys(user['Confirm'])
     browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[2]/form/table/tbody/tr[13]/td[2]/input').click()
-    time.sleep(1)
 
     #find account_id
     browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[1]/ul/li[2]/a').click()
@@ -49,20 +51,22 @@ def create_account():
     #         'Password' : user['Password'],
     #         'Username' : user['Username']
     #         }
-    return account_id
+    data = (account_id, user['Username'], user['Password'])
+    print(user)
+    return data
 
 
 # need account_id
 @pytest.fixture
 def get_accounts_accountID_transactions(create_account):
-    response = requests.get(url=GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS.format(create_account), headers={'Accept': 'application/json'})
+    response = requests.get(url=GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS.format(create_account[0]), headers={'Accept': 'application/json'})
     return response
 
 
 # need account_id, add in conftest customer_id
 @pytest.fixture
 def get_accounts_accountID(create_account):
-    response = requests.get(url=GET_ACCOUNTS_ACCOUNTID.format(create_account), headers={'Accept': 'application/json'})
+    response = requests.get(url=GET_ACCOUNTS_ACCOUNTID.format(create_account[0]), headers={'Accept': 'application/json'})
     customer = response.json()['customerId']
     return {'response': response, 'customerId': customer}
 
@@ -72,7 +76,7 @@ def get_accounts_accountID(create_account):
 # need account_id, amount
 @pytest.fixture
 def get_accounts_accountID_transactions_amount(create_account):
-    response = requests.get(url=GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_AMOUNT.format(create_account, amount), headers={'Accept': 'application/json'})
+    response = requests.get(url=GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_AMOUNT.format(create_account[0], amount), headers={'Accept': 'application/json'})
     return response
 
 
@@ -92,14 +96,21 @@ def get_customers_customerID_accounts(get_accounts_accountID):
 # need account_id, from_date, to_date
 @pytest.fixture
 def get_accountID_transactions_fromdate_todate(create_account):
-    response = requests.get(url=GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_FROMDATE_TODATE.format(create_account, from_date, to_date), headers={'Accept': 'application/json'})
+    response = requests.get(url=GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_FROMDATE_TODATE.format(create_account[0], from_date, to_date), headers={'Accept': 'application/json'})
     return response
 
-#
-# @pytest.fixture
-# def get_login_username_password(create_account):
-#     response = requests.get(url=GET_MISC, headers={'Accept': 'application/json'})
-#     return response
+
+
+
+
+
+@pytest.fixture
+def get_login_username_password(create_account):
+    print(create_account[1], create_account[2])
+    response = requests.get(url=GET_MISC.format(create_account[2], create_account[1]), headers={'Accept': 'application/json'})
+    return response
+
+
 
 
 # need customerId
@@ -124,7 +135,7 @@ def get_customers_customerID_positions(get_accounts_accountID):
 # need account_id, on_date
 @pytest.fixture()
 def get_accountID_transactions_ondate(create_account):
-    response = requests.get(url=GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_ONDATE.format(create_account, on_date), headers={'Accept': 'application/json'})
+    response = requests.get(url=GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_ONDATE.format(create_account[0], on_date), headers={'Accept': 'application/json'})
     return response
 
 
