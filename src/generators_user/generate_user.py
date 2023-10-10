@@ -56,7 +56,7 @@ class User:
         return self
 
 
-    def get_Password_Confirm(self, Password=fake.password(length = 10)):
+    def get_Password_Confirm(self, Password=fake.password(length = 8)):
         self.result['Password'] = Password
         self.result['Confirm'] = Password
         return self

@@ -3,8 +3,7 @@ import pytest
 
 from src.baseclasses.response import Response, Response_json
 from src.pydantic_schemas.get_accounts import *
-from src.pydantic_schemas.get_customers import Post_custoner_info
-
+from src.pydantic_schemas.get_customers import Post, Post_custoner_info, Post_customers_customersId_positions
 
 def test_validate_accounts_accountsID_transactions(get_accounts_accountID_transactions):
     """
@@ -91,27 +90,41 @@ def test_validate_customersID_positions(get_customers_customerID_positions):
     :param get_customers_customerID_positions:
     :return:
     """
+    print(get_customers_customerID_positions)
     print(get_customers_customerID_positions.text)
     test_object = Response_json(get_customers_customerID_positions)
     test_object.assert_status_code(200).validate(CustomerID_positions)
 
-#
-# def test_validate_transtactions_transtactionID(get_transactions_transactionID):
-#     """
-#     Test validate /transactions/{transactionId}
-#     :param get_accountID_transactions:
-#     :return:
-#     """
-#     test_object = Response_json(get_transactions_transactionID)
-#     test_object.assert_status_code(200).validate(Accounts_accountsID_transactions)
+
+def test_validate_transtactions_transtactionID(get_transactions_transactionID):
+    """
+    Test validate /transactions/{transactionId}
+    :param get_accountID_transactions:
+    :return:
+    """
+    print(get_transactions_transactionID.text)
+    test_object = Response_json(get_transactions_transactionID)
+    test_object.assert_status_code(200).validate(Accounts_accountsID_transactions)
 
 
-# def test_validate_accountID_transtactions_amount(get_accountID_transactions_amount):
-#     """
-#     Test validate /accounts/{accountId}/transactions/amount/{amount}
-#     :param get_accountID_transactions:
-#     :return:
-#     """
-#     test_object = Response_json(get_accountID_transactions_amount)
-#     test_object.assert_status_code(200).validate(Accounts_accountsID_transactions)
-#
+def test_validate_customer_customerid_accounts(get_customer_customerid_accounts):
+    """
+    Тест валидация customer_customerid_accounts
+    :param get_customers_id:
+    :return:
+    """
+    print(get_customer_customerid_accounts.text)
+    test_object = Response_json(get_customer_customerid_accounts)
+    test_object.assert_status_code(200).validate(Post)
+
+
+def test_validate_customer_customerid(get_customer_customerid):
+    """
+    Тест: валидация на значения в полях json customer_customerid_accounts
+    :param get_customer_customerid:
+    :return:
+    """
+    print(get_customer_customerid.text)
+    test_object = Response_json(get_customer_customerid)
+    test_object.assert_status_code(200)
+    test_object.validate(Post_custoner_info)

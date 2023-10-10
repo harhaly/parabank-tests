@@ -37,7 +37,7 @@ class Response_json:
         if isinstance(status_code, list):
             assert self.response_status in status_code, self
         else:
-            assert self.response_status == status_code, self
+            assert self.response_status == status_code, 'Error status code'
         return self
 
 
