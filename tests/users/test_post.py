@@ -42,10 +42,6 @@ def test_post_transfer(post_transfer):
     test_object = Response(post_transfer)
     test_object.assert_status_code(200).validate_str()
 
-# @pytest.skip
-# def test_billpay():
-#     pass
-
 
 def test_post_update_info(post_update_info):
     """
@@ -55,4 +51,21 @@ def test_post_update_info(post_update_info):
     """
     test_object = Response(post_update_info)
     test_object.assert_status_code(200).validate_str()
+
+
+def test_requestloan(post_requestloan):
+    """
+    Тест валидация POST transfer
+    :param post_transfer:
+    :return:
+    """
+    print(post_requestloan.text)
+    test_object = Response_json(post_requestloan)
+    test_object.assert_status_code(200).validate(RequestLoan)
+
+# # @pytest.skip
+# # def test_billpay():
+# #     pass
+#
+#
 

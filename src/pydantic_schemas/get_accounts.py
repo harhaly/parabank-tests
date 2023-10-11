@@ -1,4 +1,5 @@
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, StrictBool
+from typing import Optional
 
 
 class Accounts_accountsID_transactions(BaseModel):
@@ -17,49 +18,6 @@ class Accounts_accountsID(BaseModel):
     balance: float
 
 
-class Accounts_accountsID_transactions_amount(BaseModel):
-    id: int
-    accountId: int
-    type: str
-    date: str
-    amount: int
-    description: str
-
-
-class Customers_customerID_accounts(BaseModel):
-    id: int
-    customerId: int
-    type: str
-    balance: float
-
-
-class AccountID_transactions_month_type(BaseModel):
-    id: int
-    accountId: int
-    type: str
-    date: str
-    amount: str
-    description: str
-
-
-class AccountID_transactions_fromdate_todate(BaseModel):
-    id: int
-    accountId: int
-    type: str
-    date: str
-    amount: int
-    description: str
-
-
-class AccountID_transactions_ondate(BaseModel):
-    id: int
-    accountId: int
-    type: str
-    date: str
-    amount: str
-    description: str
-
-
 class CustomerID_positions(BaseModel):
     positionId: int
     customerId: int
@@ -69,10 +27,28 @@ class CustomerID_positions(BaseModel):
     purchasePrice: int
 
 
-class AccountID_transactions_ondate(BaseModel):
+class RequestLoan(BaseModel):
+    try:
+        responseDate: str
+        loanProviderName: str
+        approved: bool
+        message: Optional[str] = None
+        accountId: int
+    except ValueError as exc:
+        print(repr(exc.errors()[0]['type']))
+
+
+class Address(BaseModel):
+    street: str
+    city: str
+    state: str
+    zipCode: str
+
+
+class Post_custoner_info(BaseModel):
     id: int
-    accountId: int
-    type: str
-    date: str
-    amount: int
-    description: str
+    firstName: str
+    lastName: str
+    address: Address
+    phoneNumber: str
+    ssn: str

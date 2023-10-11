@@ -8,14 +8,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 
 from src.generators_user.generate_user import User
-from src.baseclasses.response import Response, Response_json
 
 
 @pytest.fixture
 def create_account():
+
     global data
     if data [0] != 0:
         return data
+
+    # clean database
+    requests.post(url=POST_CLEANDB)
 
     # selenium setup
     browser = webdriver.Chrome()
@@ -26,6 +29,7 @@ def create_account():
     #user = User().get_Username('z').get_Password_Confirm('z').build()
     user = User().build()
 
+
     # registration
     browser.find_element(By.LINK_TEXT, 'Register').click()
     browser.find_element(By.ID, 'customer.firstName').send_keys(user['First_name'])
@@ -34,12 +38,14 @@ def create_account():
     browser.find_element(By.ID, 'customer.address.city').send_keys(user['City'])
     browser.find_element(By.ID, 'customer.address.state').send_keys(user['State'])
     browser.find_element(By.ID, 'customer.address.zipCode').send_keys(user['Zip code'])
-    browser.find_element(By.ID, 'customer.phoneNumber').send_keys(user['Phone'])
+    # bag on the serves site: number > 20 it doesn't acc
+    browser.find_element(By.ID, 'customer.phoneNumber').send_keys(user['Phone'][:20])
     browser.find_element(By.ID, 'customer.ssn').send_keys(user['SSN'])
     browser.find_element(By.ID, 'customer.username').send_keys(user['Username'])
     browser.find_element(By.ID, 'customer.password').send_keys(user['Password'])
     browser.find_element(By.ID, 'repeatedPassword').send_keys(user['Confirm'])
     browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[2]/form/table/tbody/tr[13]/td[2]/input').click()
+    print(user)
 
     # find account_id
     browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[1]/ul/li[2]/a').click()
@@ -126,7 +132,6 @@ def get_accountID_transactions_fromdate_todate(create_account):
 # need user_name password
 @pytest.fixture
 def get_login_username_password(create_account):
-    print(create_account[1], create_account[2])
     response = requests.get(url=GET_MISC.format(create_account[1], create_account[2]), headers={'Accept': 'application/json'})
     return response
 
@@ -166,32 +171,62 @@ def get_customer_customerid(get_accounts_accountID):
     return response
 
 
-# #test_POST
-# @pytest.fixture()
-# def post_createAccount():
-#     response = requests.post(url=POST_CREATE_ACCOUNT, headers={'Accept': 'application/json'})
-#     return response
-#
-#
-# @pytest.fixture()
-# def post_deposit():
-#     response = requests.post(url=POST_DEPOSIT, headers={'Accept': 'application/json'})
-#     return response
-#
-#
-# @pytest.fixture()
-# def post_withdraw():
-#     response = requests.post(url=POST_WITHDRAW, headers={'Accept': 'application/json'})
-#     return response
-#
-#
-# @pytest.fixture()
-# def post_transfer():
-#     response = requests.post(url=POST_TRANSFER, headers={'Accept': 'application/json'})
-#     return response
-#
-#
-# @pytest.fixture()
-# def post_update_info():
-#     response = requests.post(url=POST_UPDATE, headers={'Accept': 'application/json'})
-#     return response
+# test_POST
+# customerId, need account_id, newAccountType
+@pytest.fixture()
+def post_createAccount(create_account, get_accounts_accountID):
+    response = requests.post(url=POST_CREATE_ACCOUNT.format(get_accounts_accountID['customerId'], newAccountType, format(create_account[0])), headers={'Accept': 'application/json'})
+    return response
+
+
+# need account_id, amount
+@pytest.fixture()
+def post_deposit(create_account):
+    response = requests.post(url=POST_DEPOSIT.format(create_account[0], amount), headers={'Accept': 'application/json'})
+    return response
+
+
+# need account_id, amount
+@pytest.fixture()
+def post_withdraw(create_account):
+    response = requests.post(url=POST_WITHDRAW.format(create_account[0], amount), headers={'Accept': 'application/json'})
+    return response
+
+
+@pytest.fixture()
+def post_transfer(create_account):
+    response = requests.post(url=POST_TRANSFER.format(create_account[0], create_account[3], amount), headers={'Accept': 'application/json'})
+    return response
+
+
+# need customerid, user_field
+@pytest.fixture()
+def post_update_info(get_accounts_accountID):
+    #user = User().get_Username('user').get_Password_Confirm('user').build()
+    user = User().build()
+    response = requests.post(url=POST_UPDATE.format(
+        get_accounts_accountID['customerId'],
+        user['First_name'],
+        user['Last_name'],
+        user['City'],
+        user['State'],
+        user['Zip code'],
+        user['Phone'],
+        user['SSN'],
+        user['Username'],
+        user['Password'],
+        user['Confirm']
+    ), headers={'Accept': 'application/json'})
+    return response
+
+
+# need customerid, user_field
+@pytest.fixture()
+def post_requestloan(get_accounts_accountID, create_account):
+    response = requests.post(url=POST_REQUESTLOAN.format(
+        get_accounts_accountID['customerId'],
+        amount,
+        downPayment,
+        create_account[0]
+    ), headers={'Accept': 'application/json'})
+    return response

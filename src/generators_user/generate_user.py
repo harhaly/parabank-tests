@@ -1,7 +1,8 @@
 from faker import Faker
 
 
-fake = Faker()
+
+fake = Faker('en_US')
 
 
 class User:

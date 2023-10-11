@@ -1,3 +1,5 @@
+import json
+
 
 class Response:
     def __init__(self, response):
@@ -32,6 +34,7 @@ class Response_json:
                 schema.model_validate(item)
         else:
             schema.model_validate(self.response_json)
+
 
     def assert_status_code(self, status_code):
         if isinstance(status_code, list):
