@@ -1,10 +1,8 @@
-
 SERVICE_URL = 'https://parabank.parasoft.com/parabank/services/bank'
 URL_MAIN = f'https://parabank.parasoft.com/parabank/index.htm'
 
-
-#GET
-data = (0, 0, 0)
+# GET
+data_create_acc = (0, 0, 0)
 on_date = '10-12-2023'
 from_date = '01-01-1990'
 to_date = '01-01-2040'
@@ -12,7 +10,7 @@ amount = 100
 month = 10
 transaction_type = 'Debit'
 
-#POST
+# POST
 newAccountType = 0
 downPayment = 50
 name = 'Apple'
@@ -20,9 +18,9 @@ symbol = 'App'
 shares_buy = 10
 shares_sell = 5
 pricePerShare = 1
-accountNumber = 13333
-startDate = 1
-endDate = 1
+accountNumber = 13333  # под ?
+startDate = 1  # под ?
+endDate = 1  # под ?
 
 GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS = f'{SERVICE_URL}/accounts/' + '{}/transactions'
 GET_CUSTOMERS_CUSTOMERID_ACCOUNTS = f'{SERVICE_URL}/customers/' + '{}/accounts'
@@ -37,7 +35,6 @@ GET_POSITINS_CUSTOMERID = f'{SERVICE_URL}/customers/' + '{}/positions'
 GET_POSITINS_POSITIONID_STARDATE_ENDDATE = f'{SERVICE_URL}/positions/' + '{}/{}/{}'
 GET_MISC = f'{SERVICE_URL}/login/' + '{}/{}'
 GET_TRANSACTIONS_TRANSACTIONSID = f'{SERVICE_URL}/transactions/' + '{}'
-
 
 # POST
 POST_CREATE_ACCOUNT = f'{SERVICE_URL}/createAccount?customerId=' + '{}&newAccountType={}&fromAccountId={}'

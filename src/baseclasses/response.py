@@ -1,5 +1,3 @@
-import json
-
 
 class Response:
     def __init__(self, response):
@@ -19,8 +17,8 @@ class Response:
         return self
 
 
-class Response_json:
-    'response with json'
+class ResponseJson:
+    """response with json"""
 
     def __init__(self, response):
         self.response = response

@@ -1,8 +1,8 @@
-from pydantic import BaseModel, Field, field_validator, StrictBool
+from pydantic import BaseModel
 from typing import Optional
 
 
-class Accounts_accountsID_transactions(BaseModel):
+class AccountsAccountsIDTransactions(BaseModel):
     id: int
     accountId: int
     type: str
@@ -11,14 +11,14 @@ class Accounts_accountsID_transactions(BaseModel):
     description: str
 
 
-class Accounts_accountsID(BaseModel):
+class AccountsAccountsID(BaseModel):
     id: int
     customerId: int
     type: str
     balance: float
 
 
-class CustomerID_positions(BaseModel):
+class CustomerIDPositions(BaseModel):
     positionId: int
     customerId: int
     name: str
@@ -28,14 +28,11 @@ class CustomerID_positions(BaseModel):
 
 
 class RequestLoan(BaseModel):
-    try:
-        responseDate: str
-        loanProviderName: str
-        approved: bool
-        message: Optional[str] = None
-        accountId: int
-    except ValueError as exc:
-        print(repr(exc.errors()[0]['type']))
+    responseDate: str
+    loanProviderName: str
+    approved: bool
+    message: Optional[str] = None
+    accountId: int
 
 
 class Address(BaseModel):
@@ -45,7 +42,7 @@ class Address(BaseModel):
     zipCode: str
 
 
-class Post_custoner_info(BaseModel):
+class PostCustomerInfo(BaseModel):
     id: int
     firstName: str
     lastName: str
@@ -54,13 +51,13 @@ class Post_custoner_info(BaseModel):
     ssn: str
 
 
-class PositionId_startDate_endDate(BaseModel):
+class PositionIDStartDateEndDate(BaseModel):
     symbol: str
     date: str
     closingPrice: int
 
 
-class Post_billpay(BaseModel):
+class PostBillPay(BaseModel):
     payeeName: str
     amount: int
     accountId: int
