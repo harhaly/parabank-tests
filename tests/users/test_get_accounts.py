@@ -11,6 +11,7 @@ def test_validate_accounts_accountsID_transactions(get_accounts_accountID_transa
     :param get_accounts_accountID_transactions:
     :return:
     """
+    print(get_accounts_accountID_transactions.text)
     test_object = Response_json(get_accounts_accountID_transactions)
     test_object.assert_status_code(200).validate(Accounts_accountsID_transactions)
 
@@ -32,7 +33,6 @@ def test_validate_accounts_accountsID(get_accounts_accountID):
     :return:
     """
     test_object = Response_json(get_accounts_accountID['response'])
-    print(test_object.response_json)
     test_object.assert_status_code(200).validate(Accounts_accountsID)
 
 
@@ -78,18 +78,6 @@ def test_validate_misc_login(get_login_username_password):
     test_object.assert_status_code(200).validate(Post_custoner_info)
 
 
-def test_validate_customersID_positions(get_customers_customerID_positions):
-    """
-    Тест валидация /customers/{customerId}/positions
-    :param get_customers_customerID_positions:
-    :return:
-    """
-    print(get_customers_customerID_positions)
-    print(get_customers_customerID_positions.text)
-    test_object = Response_json(get_customers_customerID_positions)
-    test_object.assert_status_code(200).validate(CustomerID_positions)
-
-
 def test_validate_transtactions_transtactionID(get_transactions_transactionID):
     """
     Test validate /transactions/{transactionId}
@@ -119,3 +107,16 @@ def test_validate_customer_customerid(get_customer_customerid):
     test_object = Response_json(get_customer_customerid)
     test_object.assert_status_code(200)
     test_object.validate(Post_custoner_info)
+
+
+def test_validate_transactions_month_type(get_accountID_transactions_month_type):
+    """
+    Тест: валидация на значения в полях json get_accountID_transactions_month_type
+    :param get_accountID_transactions_month_type:
+    :return:
+    """
+    test_object = Response_json(get_accountID_transactions_month_type)
+    test_object.assert_status_code(200)
+    test_object.validate(Accounts_accountsID_transactions)
+
+

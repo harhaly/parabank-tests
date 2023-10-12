@@ -52,3 +52,15 @@ class Post_custoner_info(BaseModel):
     address: Address
     phoneNumber: str
     ssn: str
+
+
+class PositionId_startDate_endDate(BaseModel):
+    symbol: str
+    date: str
+    closingPrice: int
+
+
+class Post_billpay(BaseModel):
+    payeeName: str
+    amount: int
+    accountId: int

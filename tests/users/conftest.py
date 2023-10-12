@@ -38,14 +38,13 @@ def create_account():
     browser.find_element(By.ID, 'customer.address.city').send_keys(user['City'])
     browser.find_element(By.ID, 'customer.address.state').send_keys(user['State'])
     browser.find_element(By.ID, 'customer.address.zipCode').send_keys(user['Zip code'])
-    # bag on the serves site: number > 20 it doesn't acc
-    browser.find_element(By.ID, 'customer.phoneNumber').send_keys(user['Phone'][:20])
+    # bag on the serves site: number > 20 it dogesn't acc
+    browser.find_element(By.ID, 'customer.phoneNumber').send_keys(user['Phone'])
     browser.find_element(By.ID, 'customer.ssn').send_keys(user['SSN'])
     browser.find_element(By.ID, 'customer.username').send_keys(user['Username'])
     browser.find_element(By.ID, 'customer.password').send_keys(user['Password'])
     browser.find_element(By.ID, 'repeatedPassword').send_keys(user['Confirm'])
     browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[2]/form/table/tbody/tr[13]/td[2]/input').click()
-    print(user)
 
     # find account_id
     browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[1]/ul/li[2]/a').click()
@@ -74,6 +73,7 @@ def create_account():
     browser.find_element(By.XPATH, '//*[@id="criteria.onDate"]').send_keys(on_date)
     browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[2]/div/div/form/div[5]/button').click()
     browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[2]/div/div/table/tbody/tr[1]/td[2]/a').click()
+    time.sleep(2)
     transactionsID = browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[2]/table/tbody/tr[1]/td[2]').text
 
     # close browser
@@ -84,7 +84,7 @@ def create_account():
     #         'Username' : user['Username']
     #         }
     data = (account_id, user['Username'], user['Password'], toAccount, transactionsID)
-    print(user)
+    print(data)
     return data
 
 
@@ -116,11 +116,12 @@ def get_customers_customerID_accounts(get_accounts_accountID):
     response = requests.get(url=GET_CUSTOMERS_CUSTOMERID_ACCOUNTS.format(get_accounts_accountID['customerId']), headers={'Accept': 'application/json'})
     return response
 
-#
-# @pytest.fixture
-# def get_accountID_transactions_month_type():
-#     response = requests.get(url=GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_MONTH_TYPE, headers={'Accept': 'application/json'})
-#     return response
+
+# need account_id, moth, transaction_type
+@pytest.fixture()
+def get_accountID_transactions_month_type(create_account):
+    response = requests.get(url=GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_MONTH_TYPE.format(create_account[0], month, transaction_type), headers={'Accept': 'application/json'})
+    return response
 
 
 # need account_id, from_date, to_date
@@ -133,13 +134,6 @@ def get_accountID_transactions_fromdate_todate(create_account):
 @pytest.fixture
 def get_login_username_password(create_account):
     response = requests.get(url=GET_MISC.format(create_account[1], create_account[2]), headers={'Accept': 'application/json'})
-    return response
-
-
-# need customerId
-@pytest.fixture()
-def get_customers_customerID_positions(get_accounts_accountID):
-    response = requests.get(url=GET_CUSTOMER_CUSTOMERID_POSITIONS.format(get_accounts_accountID['customerId']), headers={'Accept': 'application/json'})
     return response
 
 
@@ -217,7 +211,7 @@ def post_update_info(get_accounts_accountID):
         user['Password'],
         user['Confirm']
     ), headers={'Accept': 'application/json'})
-    return response
+    return {'response' : response, 'user': user}
 
 
 # need customerid, user_field
@@ -228,5 +222,62 @@ def post_requestloan(get_accounts_accountID, create_account):
         amount,
         downPayment,
         create_account[0]
+    ), headers={'Accept': 'application/json'})
+    return response
+
+
+@pytest.fixture()
+def post_buypositions(get_accounts_accountID, create_account):
+    response = requests.post(url=POST_CUSTOMERID_BUYPOSITIONS.format(
+        get_accounts_accountID['customerId'],
+        create_account[0],
+        name,
+        symbol,
+        shares_buy,
+        pricePerShare
+    ), headers={'Accept': 'application/json'})
+    positionId = response.json()[0]['positionId']
+    return {'response': response, 'positionId': positionId}
+
+
+@pytest.fixture()
+def post_sellpositions(get_accounts_accountID, create_account, post_buypositions):
+    response = requests.post(url=POST_CUSTOMERID_SELLPOSITIONS.format(
+        get_accounts_accountID['customerId'],
+        create_account[0],
+        post_buypositions['positionId'],
+        shares_sell,
+        pricePerShare
+    ), headers={'Accept': 'application/json'})
+    return response
+
+
+@pytest.fixture()
+def post_billpay(create_account):
+    user = User().build()
+    data_post = {
+        "name": user['First_name'],
+        "address": user['City'],
+        "state": user['State'],
+        "zipCode": user['Zip code'],
+        "phoneNumber": user['Phone'],
+        "accountNumber": accountNumber
+    }
+    response = requests.post(url=POST_BILLPAY.format(create_account[0], amount), json=data_post, headers={'Accept': 'application/json'})
+    return response
+
+
+@pytest.fixture()
+def get_position_customer(get_accounts_accountID):
+    response = requests.get(url=GET_POSITINS_CUSTOMERID.format(get_accounts_accountID['customerId']), headers={'Accept': 'application/json'})
+    return response
+
+
+@pytest.fixture()
+def get_position_stardate_enddate(post_buypositions):
+    response = requests.get(url=GET_POSITINS_POSITIONID_STARDATE_ENDDATE.format(
+        post_buypositions['positionId'],
+        from_date,
+        to_date
     ), headers={'Accept': 'application/json'})
     return response
