@@ -1,9 +1,14 @@
+import datetime
+
+
 SERVICE_URL = 'https://parabank.parasoft.com/parabank/services/bank'
 URL_MAIN = f'https://parabank.parasoft.com/parabank/index.htm'
 
 # GET
 data_create_acc = (0, 0, 0)
-on_date = '10-12-2023'
+
+date_today = datetime.date.today()
+on_date = f'{date_today.month}-{date_today.day}-{date_today.year}'
 from_date = '01-01-1990'
 to_date = '01-01-2040'
 amount = 100
@@ -22,19 +27,19 @@ accountNumber = 13333  # под ?
 startDate = 1  # под ?
 endDate = 1  # под ?
 
-GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS = f'{SERVICE_URL}/accounts/' + '{}/transactions'
-GET_CUSTOMERS_CUSTOMERID_ACCOUNTS = f'{SERVICE_URL}/customers/' + '{}/accounts'
-GET_ACCOUNTS_ACCOUNTID = f'{SERVICE_URL}' + '/accounts/{}'
-GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_AMOUNT = f'{SERVICE_URL}/accounts/' + '{}/transactions/amount/{}'
-GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_MONTH_TYPE = f'{SERVICE_URL}/accounts/' + '{}/transactions/month/{}/type/{}'
-GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_FROMDATE_TODATE = f'{SERVICE_URL}/accounts/' + '{}/transactions/fromDate/{}/toDate/{}'
-GET_ACCOUNTS_ACCOUNTID_TRANSACTIONS_ONDATE = f'{SERVICE_URL}/accounts/' + '{}/transactions/onDate/{}'
-GET_CUSTOMER_CUSTOMERID = f'{SERVICE_URL}/customers/' + '{}'
+GET_ACCOUNTID_TRANSACTIONS = f'{SERVICE_URL}/accounts/' + '{}/transactions'
+GET_CUSTOMERID_ACCOUNTS = f'{SERVICE_URL}/customers/' + '{}/accounts'
+GET_ACCOUNTID = f'{SERVICE_URL}' + '/accounts/{}'
+GET_ACCOUNTID_TRANSACTIONS_AMOUNT = f'{SERVICE_URL}/accounts/' + '{}/transactions/amount/{}'
+GET_ACCOUNTID_TRANSACTIONS_MONTH_TYPE = f'{SERVICE_URL}/accounts/' + '{}/transactions/month/{}/type/{}'
+GET_ACCOUNTID_TRANSACTIONS_FROMDATE_TODATE = f'{SERVICE_URL}/accounts/' + '{}/transactions/fromDate/{}/toDate/{}'
+GET_ACCOUNTID_TRANSACTIONS_ONDATE = f'{SERVICE_URL}/accounts/' + '{}/transactions/onDate/{}'
+GET_CUSTOMERID = f'{SERVICE_URL}/customers/' + '{}'
 GET_CUSTOMER_CUSTOMERID_ACCOUNTS = f'{SERVICE_URL}/customers/' + '{}/accounts'
 GET_POSITINS_CUSTOMERID = f'{SERVICE_URL}/customers/' + '{}/positions'
-GET_POSITINS_POSITIONID_STARDATE_ENDDATE = f'{SERVICE_URL}/positions/' + '{}/{}/{}'
+GET_POSITINS_STARDATE_ENDDATE = f'{SERVICE_URL}/positions/' + '{}/{}/{}'
 GET_MISC = f'{SERVICE_URL}/login/' + '{}/{}'
-GET_TRANSACTIONS_TRANSACTIONSID = f'{SERVICE_URL}/transactions/' + '{}'
+GET_TRANSACTIONSID = f'{SERVICE_URL}/transactions/' + '{}'
 
 # POST
 POST_CREATE_ACCOUNT = f'{SERVICE_URL}/createAccount?customerId=' + '{}&newAccountType={}&fromAccountId={}'
