@@ -14,12 +14,13 @@ class Response:
         if isinstance(status_code, list):
             assert self.response_status in status_code, self
         else:
-            assert self.response_status == status_code, 'Error status code'
+            assert self.response_status == status_code, f'Error status code {self.response_status} != {status_code}'
         return self
 
     @allure.step('Validate response string')
-    def validate_str(self):
-        assert type(self.response_text) == str, self
+    def validate_str(self, assert_test):
+        print(self.response_text)
+        assert self.response_text == assert_test, f'Error request text {self.response_text} != {assert_test}'
         return self
 
 

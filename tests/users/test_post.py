@@ -1,6 +1,7 @@
 import allure
 import pytest
 
+from configuration import amount
 from src.baseclasses.response import Response, ResponseJson
 from src.pydantic_schemas.get_accounts import *
 
@@ -14,25 +15,24 @@ class TestPost:
         test_object.assert_status_code(200).validate(AccountsAccountsID)
 
     @allure.title('Post deposit')
-    def test_post_deposit(self, post_deposit):
+    def test_post_deposit(self, post_deposit, create_account):
         test_object = Response(post_deposit)
-        test_object.assert_status_code(200).validate_str()
+        test_object.assert_status_code(200).validate_str(f'Successfully deposited ${amount} to account #{create_account[0]}')
 
     @allure.title('Post withdraw')
-    def test_post_withdraw(self, post_withdraw):
+    def test_post_withdraw(self, post_withdraw, create_account):
         test_object = Response(post_withdraw)
-        test_object.assert_status_code(200).validate_str()
+        test_object.assert_status_code(200).validate_str(f'Successfully withdrew ${amount} from account #{create_account[0]}')
 
     @allure.title('Post transfer')
-    def test_post_transfer(self, post_transfer):
-
+    def test_post_transfer(self, post_transfer, create_account):
         test_object = Response(post_transfer)
-        test_object.assert_status_code(200).validate_str()
+        test_object.assert_status_code(200).validate_str(f'Successfully transferred ${amount} from account #{create_account[0]} to account #{create_account[3]}')
 
     @allure.title('Post update info')
     def test_post_update_info(self, post_update_info):
         test_object = Response(post_update_info['response'])
-        test_object.assert_status_code(200).validate_str()
+        test_object.assert_status_code(200).validate_str("Successfully updated customer profile")
 
     @allure.title('Post request loan')
     def test_request_loan(self, post_request_loan):
@@ -60,9 +60,7 @@ class TestPost:
         test_object.assert_status_code(200).validate(CustomerIDPositions)
 
     @pytest.mark.skip('Нет информации про star_date end_date. Либо не тот positionID')
-    @allure.title('Post positions stardate enddate')
+    @allure.title('Post positions star_date end_date')
     def test_position_start_date_end_date(self, get_position_star_date_end_date):
-        print(get_position_star_date_end_date.text)
         test_object = ResponseJson(get_position_star_date_end_date)
         test_object.assert_status_code(200).validate(PositionIDStartDateEndDate)
-

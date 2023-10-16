@@ -19,7 +19,7 @@ def create_account():
         return data_create_acc
 
     # clean database
-    #requests.post(url=POST_CLEANDB)
+    requests.post(url=POST_CLEANDB)
 
     # selenium setup
     browser = webdriver.Chrome()
