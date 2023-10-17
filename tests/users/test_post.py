@@ -57,7 +57,7 @@ class TestPost:
         test_object = ResponseJson(get_position_customer)
         test_object.assert_status_code(200).validate(CustomerIDPositions)
 
-    @pytest.skip('Некорректный запрос')
+    @pytest.mark.skip('Некорректный запрос')
     @allure.title('Post bill pay')
     def test_bill_pay(self, post_bill_pay):
         test_object = ResponseJson(post_bill_pay)
