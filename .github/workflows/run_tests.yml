@@ -16,7 +16,7 @@ on:
 permissions:
   contents: read
   pages: write
-  id-token: wrire
+  id-token: write
   
 jobs:
   test:
