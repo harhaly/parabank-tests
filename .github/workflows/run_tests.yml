@@ -20,9 +20,9 @@ permissions:
   
 jobs:
 
-  download-history:
-    runs-on: ubuntu-latest
-    name: Download history
+  # download-history:
+  #   runs-on: ubuntu-latest
+  #   name: Download history
     
     # steps:
     #   - name: setup Python
