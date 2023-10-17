@@ -1,7 +1,17 @@
 name: Automated tests
 
 on:
-  push
+  workflow_dispatch:
+    inputs:
+      deployment_target:
+        description: Choose target
+        required: true
+        default:
+        type: choice
+        options:
+          - test
+          - test_post
+          - test_get
 
 jobs:
   test:
@@ -18,5 +28,12 @@ jobs:
         run: sudo apt-get install google-chrome-stable
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Run tests
-        run: pytest --alluredir=\allure_result tests* -s -v
+      - name: test
+        if: "github.event.inputs.deployment_target == 'test'"
+        run: pytest  -v
+      - name: test_post
+        if: "github.event.inputs.deployment_target == 'test_post'"
+        run: pytest tests/users/test_post.py -v
+      - name: test
+        if: "github.event.inputs.deployment_target == 'test_get'"
+        run: pytest tests/users/test_get_accounts.py -v
