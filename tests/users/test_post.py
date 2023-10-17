@@ -57,13 +57,13 @@ class TestPost:
         test_object = ResponseJson(get_position_customer)
         test_object.assert_status_code(200).validate(CustomerIDPositions)
 
-    @pytest.mark.skip('Некорректный запрос')
+    #@pytest.mark.skip('Некорректный запрос')
     @allure.title('Post bill pay')
     def test_bill_pay(self, post_bill_pay):
         test_object = ResponseJson(post_bill_pay)
         test_object.assert_status_code(200).validate(PostBillPay)
 
-    @pytest.mark.skip('Нет информации про star_date end_date. Либо не тот positionID')
+    #@pytest.mark.skip('Нет информации про star_date end_date. Либо не тот positionID')
     @allure.title('Post positions star_date end_date')
     def test_position_start_date_end_date(self, get_position_star_date_end_date):
         test_object = ResponseJson(get_position_star_date_end_date)
