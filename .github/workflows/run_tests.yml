@@ -13,6 +13,11 @@ on:
           - test_post
           - test_get
 
+permissions:
+  contents: read
+  pages: write
+  id-token: wrire
+  
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -42,7 +47,7 @@ jobs:
           name: allure-result
           path:
             allure-result
-          retentions-days: 1
+          retention-days: 1
   
   generate-report:
     runs-on: ubuntu-latest
@@ -63,7 +68,7 @@ jobs:
           name: _site
           path:
             _site
-          retentions-days: 1
+          retention-days: 1
       
   publish-report:
     runs-on: ubuntu-latest
