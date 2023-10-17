@@ -17,17 +17,20 @@ class TestPost:
     @allure.title('Post deposit')
     def test_post_deposit(self, post_deposit, create_account):
         test_object = Response(post_deposit)
-        test_object.assert_status_code(200).validate_str(f'Successfully deposited ${amount} to account #{create_account[0]}')
+        account_id = create_account['account_id']
+        test_object.assert_status_code(200).validate_str(f'Successfully deposited ${amount} to account #{account_id}')
 
     @allure.title('Post withdraw')
     def test_post_withdraw(self, post_withdraw, create_account):
         test_object = Response(post_withdraw)
-        test_object.assert_status_code(200).validate_str(f'Successfully withdrew ${amount} from account #{create_account[0]}')
+        account_id = create_account['account_id']
+        test_object.assert_status_code(200).validate_str(f'Successfully withdrew ${amount} from account #{account_id}')
 
     @allure.title('Post transfer')
     def test_post_transfer(self, post_transfer, create_account):
         test_object = Response(post_transfer)
-        test_object.assert_status_code(200).validate_str(f'Successfully transferred ${amount} from account #{create_account[0]} to account #{create_account[3]}')
+        from_account, to_account = create_account['account_id'], create_account['to_account']
+        test_object.assert_status_code(200).validate_str(f'Successfully transferred ${amount} from account #{from_account} to account #{to_account}')
 
     @allure.title('Post update info')
     def test_post_update_info(self, post_update_info):

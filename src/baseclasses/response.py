@@ -19,7 +19,6 @@ class Response:
 
     @allure.step('Validate response string')
     def validate_str(self, assert_test):
-        print(self.response_text)
         assert self.response_text == assert_test, f'Error request text {self.response_text} != {assert_test}'
         return self
 
