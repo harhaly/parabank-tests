@@ -6,6 +6,8 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from configuration import *
 from src.generators_user.generate_user import User
@@ -20,19 +22,19 @@ def create_account():
         return data_create_acc
 
     # clean database
-    requests.post(url=POST_CLEAN_DB)
+    #requests.post(url=POST_CLEAN_DB)
 
     # selenium setup
-    options = Options()
-    options.add_argument('--headless')
-    browser = webdriver.Chrome(options=options)
+    #options = Options()
+    #options.add_argument('--headless')
+    #browser = webdriver.Chrome(options=options)
+
+    browser = webdriver.Chrome()
     browser.get(URL_MAIN)
     browser.implicitly_wait(5)
 
     with allure.step('Create all fields'):
         user = User().build()
-        # user = User().get_username('aaaa').get_password_confirm('ffff').build()
-
     with allure.step('Registration'):
         browser.find_element(By.LINK_TEXT, 'Register').click()
         browser.find_element(By.ID, 'customer.firstName').send_keys(user['First_name'])
@@ -51,23 +53,32 @@ def create_account():
         browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[2]/form/table/tbody/tr[13]/td[2]/input').click()
 
     with allure.step('Find account_id'):
-        browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[1]/ul/li[2]/a').click()
-        time.sleep(2)
-        account_id = browser.find_element(By.CLASS_NAME, 'ng-binding').text
-        time.sleep(2)
+        browser.find_element(By.LINK_TEXT, 'Accounts Overview').click()
+        browser.find_element(By.CLASS_NAME, 'gradient-style')
+        wait = WebDriverWait(browser, 5)
+        wait.until(EC.visibility_of_element_located((By.XPATH, '/html/body/div[1]/div[3]/div[2]/div/div/table/tbody/tr[1]/td[1]/a')))
+        account_id = browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[2]/div/div/table/tbody/tr[1]/td[1]/a').text
 
     with allure.step('Create second account'):
         browser.find_element(By.LINK_TEXT, 'Open New Account').click()
         time.sleep(2)
+
+        # element = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[1]/div[3]/div[2]/div/div/form/div/input')))
+        # element.click()
+
         browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[2]/div/div/form/div/input').click()
-        to_account = browser.find_element(By.CLASS_NAME, 'ng-binding').text
-        time.sleep(2)
+        to_account = browser.find_element(By.XPATH, '//*[@id="newAccountId"]').text
+
 
     # create transactions
     with allure.step('Transaction'):
         browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[1]/ul/li[3]/a').click()
+
         time.sleep(2)
+        #wait.until(EC.visibility_of_element_located((By.XPATH, '/html/body/div[1]/div[3]/div[2]/div/div/form/div[1]/select[1]/option[1]')))
+
         browser.find_element(By.XPATH, '//*[@id="amount"]').send_keys(amount)
+        time.sleep(2)
         dropdown = browser.find_element(By.ID, 'toAccountId')
         se = Select(dropdown)
         se.select_by_visible_text(to_account)
@@ -80,7 +91,6 @@ def create_account():
         browser.find_element(By.XPATH, '//*[@id="criteria.onDate"]').send_keys(on_date)
         browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[2]/div/div/form/div[5]/button').click()
         browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[2]/div/div/table/tbody/tr[1]/td[2]/a').click()
-        time.sleep(2)
     with allure.step('Save find element'):
         transactions_id = browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[2]/table/tbody/tr[1]/td[2]').text
 
