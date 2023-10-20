@@ -8,9 +8,9 @@
 [Ссылки по теме и документация](#ссылки-по-теме-и-документация) <br>
 <a name="link"></a>
 ## Обзор и инструменты
-Тестовый фреймворк для демонстрационного сайта [Parabank](https://parabank.parasoft.com/parabank/admin.htm) и [Swagger Paranak REST API](https://parabank.parasoft.com/parabank/api-docs/index.html). Основной упор приходится тестировании API и немного затрагивается UI. Это личный проект для учебных целей, никакого другого отношения к реальной тестируемой систему я не имею.
+Набор тестов для демонстрационного сайта [Parabank](https://parabank.parasoft.com/parabank/admin.htm) и [Swagger Paranak REST API](https://parabank.parasoft.com/parabank/api-docs/index.html). Основной упор приходится тестировании API и немного затрагивается UI. Это личный проект для учебных целей.
 
-Текущая среда тестирования разработана с использованием среды тестирования Python Pytest с использованием Request для тестирования запросов. Pydantic для схем и Selenium WebDriver для UI тестирования (Только для Chrome). А также генерации Allure отчетов, как локально, так и через githun actions [Allure report](https://harhaly.github.io/parabank-tests/)
+Тесты разработаны с использованием среды тестирования Python Pytest с использованием Request для тестирования запросов. Pydantic для схем и Selenium WebDriver для UI тестирования (Только для Chrome). А также генерации Allure отчетов, как локально, так и через githun actions [Allure report](https://harhaly.github.io/parabank-tests/)
 <a name="link"></a>
 ## Структура проекта
 Основные ссылки, переменные хранятся в configuration.py, они используются для инициализации тестовых функций (@pytest.fixture). Сначала проходит регистрация аккаунта через UI (регистрация по API не предусмотрена), она возвращает переменные, необходимые в последующих тестах. Часть тестов связаны, при падении некоторых тестов, могут упасть и другие (как пример fixture create_account). Разбивка по тестам на текущий момент разделена на get и post запросы. 
