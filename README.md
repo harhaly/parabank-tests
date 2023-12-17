@@ -1,5 +1,6 @@
 [README_en](https://github.com/harhaly/parabank-tests/blob/master/documents/README_en.md)
-![logo](https://github.com/harhaly/parabank-tests/blob/master/documents/logo.gif?raw=true)
+
+[![logo](https://github.com/harhaly/parabank-tests/blob/master/documents/logo.gif?raw=true)](https://parabank.parasoft.com/parabank/index.htm)
 ## Что это?
 
 Набор тестов для демонстрационного сайта [Parabank](https://parabank.parasoft.com/parabank/admin.htm) и [Swagger Parabank REST API](https://parabank.parasoft.com/parabank/api-docs/index.html). Основной упор приходится на тестирование API и немного затрагивается UI. Это личный проект для учебных целей.
