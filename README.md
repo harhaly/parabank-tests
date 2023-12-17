@@ -1,5 +1,7 @@
 [README_en](https://github.com/harhaly/parabank-tests/blob/master/documents/README_en.md)
 
+[Allure Репорт](https://harhaly.github.io/parabank-tests/) | [Тест кейс en](https://docs.google.com/spreadsheets/d/1Iu9yCDM-MTTyn3iIlj5q4Fvj2hpqVeY_/edit?usp=sharing&ouid=118116959263751703136&rtpof=true&sd=true) | [Тест кейс en](https://docs.google.com/spreadsheets/d/1J38to9NF8jPsy_bGJksiUTfMSK13hjPi/edit?usp=sharing&ouid=118116959263751703136&rtpof=true&sd=true)
+
 <h1 align="center">
   <a href="https://parabank.parasoft.com/parabank/index.htm" title="Демонстрационный сайт">
     <img alt="Logo" src="https://github.com/harhaly/parabank-tests/blob/master/documents/logo.gif?raw=true" width="200px" height="50px" />
@@ -97,6 +99,3 @@
 ## Ссылки по теме и документация
 * [Тестируемый веб сайт](https://parabank.parasoft.com/parabank/admin.htm)
 * [Тестируемое API](https://parabank.parasoft.com/parabank/api-docs/index.html)
-* [Allure report](https://harhaly.github.io/parabank-tests/)
-* [Тест кейс на английском](https://docs.google.com/spreadsheets/d/1eoF9LRaEGKj63altIam2rnDXi5NagGyF/edit?usp=drive_link&ouid=118116959263751703136&rtpof=true&sd=true)
-* [Тест кейс на русском](https://docs.google.com/spreadsheets/d/1wWk-MLANMcW1VtjMtVnqmTfoTZvg3aRK/edit?usp=drive_link&ouid=118116959263751703136&rtpof=true&sd=true)
