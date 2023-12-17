@@ -1,3 +1,10 @@
+[README_ru](https://github.com/harhaly/parabank-tests/blob/master/README.md)
+
+<h1 align="center">
+  <a href="https://parabank.parasoft.com/parabank/index.htm" title="Demo sire">
+    <img alt="Logo" src="https://github.com/harhaly/parabank-tests/blob/master/documents/logo.gif?raw=true" width="200px" height="50px" />
+  </a>
+</h1>
 
 ## What is this?
 
@@ -92,4 +99,4 @@ Although many goals have been achieved, there are still additional features that
 * [Tested API](https://parabank.parasoft.com/parabank/api-docs/index.html)
 * [Allure report](https://harhaly.github.io/parabank-tests/)
 * [Test case en](https://docs.google.com/spreadsheets/d/1eoF9LRaEGKj63altIam2rnDXi5NagGyF/edit?usp=drive_link&ouid=118116959263751703136&rtpof=true&sd=true)
-* [Test case ru](https://docs.google.com/spreadsheets/d/1wWk-MLANMcW1VtjMtVnqmTfoTZvg3aRK/edit?usp=drive_link&ouid=118116959263751703136&rtpof=true&sd=true).
+* [Test case ru](https://docs.google.com/spreadsheets/d/1wWk-MLANMcW1VtjMtVnqmTfoTZvg3aRK/edit?usp=drive_link&ouid=118116959263751703136&rtpof=true&sd=true)
