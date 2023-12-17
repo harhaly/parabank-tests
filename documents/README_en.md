@@ -91,3 +91,5 @@ Although many goals have been achieved, there are still additional features that
 * [Tested website](https://parabank.parasoft.com/parabank/admin.htm)
 * [Tested API](https://parabank.parasoft.com/parabank/api-docs/index.html)
 * [Allure report](https://harhaly.github.io/parabank-tests/)
+* [Test case en](https://docs.google.com/spreadsheets/d/1eoF9LRaEGKj63altIam2rnDXi5NagGyF/edit?usp=drive_link&ouid=118116959263751703136&rtpof=true&sd=true)
+* [Test case ru](https://docs.google.com/spreadsheets/d/1wWk-MLANMcW1VtjMtVnqmTfoTZvg3aRK/edit?usp=drive_link&ouid=118116959263751703136&rtpof=true&sd=true).
