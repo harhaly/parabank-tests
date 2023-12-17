@@ -1,4 +1,5 @@
-
+[README_en](https://github.com/harhaly/parabank-tests/blob/master/documents/README_en.md)
+![logo](https://github.com/harhaly/parabank-tests/blob/master/documents/logo.gif?raw=true)
 ## Что это?
 
 Набор тестов для демонстрационного сайта [Parabank](https://parabank.parasoft.com/parabank/admin.htm) и [Swagger Parabank REST API](https://parabank.parasoft.com/parabank/api-docs/index.html). Основной упор приходится на тестирование API и немного затрагивается UI. Это личный проект для учебных целей.
@@ -91,3 +92,5 @@
 * [Тестируемый веб сайт](https://parabank.parasoft.com/parabank/admin.htm)
 * [Тестируемое API](https://parabank.parasoft.com/parabank/api-docs/index.html)
 * [Allure report](https://harhaly.github.io/parabank-tests/)
+* [Тест кейс на английском](https://docs.google.com/spreadsheets/d/1eoF9LRaEGKj63altIam2rnDXi5NagGyF/edit?usp=drive_link&ouid=118116959263751703136&rtpof=true&sd=true)
+* [Тест кейс на русском](https://docs.google.com/spreadsheets/d/1wWk-MLANMcW1VtjMtVnqmTfoTZvg3aRK/edit?usp=drive_link&ouid=118116959263751703136&rtpof=true&sd=true)
