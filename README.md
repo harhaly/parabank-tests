@@ -2,7 +2,7 @@
 
 <h1 align="center">
   <a href="https://parabank.parasoft.com/parabank/index.htm" title="Демонстрационный сайт">
-    <img alt="Logo" src="https://github.com/harhaly/parabank-tests/blob/master/documents/logo.gif?raw=true" width="200px" height="200px" />
+    <img alt="Logo" src="https://github.com/harhaly/parabank-tests/blob/master/documents/logo.gif?raw=true" width="200px" height="125px" />
   </a>
   <br />
   Awesome CV
