@@ -13,7 +13,6 @@ data_create_acc = {'account_id': 0,
                    }
 date_today = datetime.date.today()
 on_date = f'{date_today.month}-{date_today.day}-{date_today.year}'
-#on_date = '10-17-2023'
 month = date_today.month
 from_date = '01-01-1990'
 to_date = '01-01-2040'
